@@ -1,17 +1,30 @@
 with source as (
-    SELECT * FROM {{source('raw', 'loja')}}
-)
+
+    select *
+    from {{ source('raw', 'loja') }}
+
+),
 
 renamed as (
-   SELECT
-   loja_id,
-   endereco_id,
-   initcap(trim(nome)) as nome,
-   regexp_replace(telefone, '[0-9]')
 
+    select
+        loja_id,
+        endereco_id,
 
+        initcap(trim(nome)) as nome,
+
+        nullif(
+            regexp_replace(telefone, '[^0-9]', '', 'g'),
+            ''
+        ) as telefone,
+
+        lower(trim(email)) as email,
+
+        initcap(trim(status)) as status_loja
 
     from source
+
 )
 
-SELECT * FROM renamed
+select *
+from renamed

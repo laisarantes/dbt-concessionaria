@@ -13,12 +13,22 @@ models:
 
       - name: endereco_id
         description: "Identificador do endereço."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_endereco')
+                field: endereco_id
 
       - name: nome
         description: "Nome do cliente padronizado."
+        data_tests:
+          - not_null
 
       - name: cpf
         description: "CPF contendo apenas números."
+        data_tests:
+          - not_null
 
       - name: telefone
         description: "Telefone contendo apenas números."
@@ -41,6 +51,8 @@ models:
 
       - name: rua
         description: "Nome da rua."
+        data_tests:
+          - not_null
 
       - name: numero
         description: "Número do imóvel."
@@ -50,15 +62,19 @@ models:
 
       - name: cidade
         description: "Cidade padronizada."
+        data_tests:
+          - not_null
 
       - name: estado
         description: "Estado padronizado."
+        data_tests:
+          - not_null
 
       - name: cep
         description: "CEP contendo apenas números."
 
   - name: stg_marca
-    description: "Tabela de marca com dados padronizados."
+    description: "Tabela de marcas com dados padronizados."
 
     columns:
       - name: marca_id
@@ -69,15 +85,22 @@ models:
 
       - name: nome
         description: "Nome da marca."
+        data_tests:
+          - not_null
 
       - name: pais_origem
-        description: "Pais origem da marca."
+        description: "País de origem da marca."
 
-      - name: status
-        description: "Status da marca"
+      - name: status_marca
+        description: "Status da marca."
+        data_tests:
+          - accepted_values:
+              values:
+                - Ativa
+                - Inativa
 
   - name: stg_cargo
-    description: "Tabela de cargo com dados padronizados."
+    description: "Tabela de cargos com dados padronizados."
 
     columns:
       - name: cargo_id
@@ -88,3 +111,358 @@ models:
 
       - name: nome
         description: "Nome do cargo."
+        data_tests:
+          - not_null
+
+  - name: stg_loja
+    description: "Tabela de lojas com dados padronizados."
+
+    columns:
+      - name: loja_id
+        description: "Identificador único da loja."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: endereco_id
+        description: "Identificador do endereço da loja."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_endereco')
+                field: endereco_id
+
+      - name: nome
+        description: "Nome da loja padronizado."
+        data_tests:
+          - not_null
+
+      - name: telefone
+        description: "Telefone da loja contendo apenas números."
+
+      - name: email
+        description: "E-mail da loja padronizado em letras minúsculas."
+
+      - name: status_loja
+        description: "Status da loja padronizado."
+        data_tests:
+          - accepted_values:
+              values:
+                - Ativa
+                - Inativa
+
+  - name: stg_fornecedor
+    description: "Tabela de fornecedores com dados padronizados."
+
+    columns:
+      - name: fornecedor_id
+        description: "Identificador único do fornecedor."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: endereco_id
+        description: "Identificador do endereço do fornecedor."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_endereco')
+                field: endereco_id
+
+      - name: nome
+        description: "Nome do fornecedor padronizado."
+        data_tests:
+          - not_null
+
+      - name: cnpj
+        description: "CNPJ do fornecedor contendo apenas números."
+
+      - name: telefone
+        description: "Telefone do fornecedor contendo apenas números."
+
+      - name: email
+        description: "E-mail do fornecedor padronizado em letras minúsculas."
+
+      - name: status_fornecedor
+        description: "Status do fornecedor padronizado."
+        data_tests:
+          - accepted_values:
+              values:
+                - Ativo
+                - Inativo
+
+  - name: stg_modelo
+    description: "Tabela de modelos com dados padronizados."
+
+    columns:
+      - name: modelo_id
+        description: "Identificador único do modelo."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: marca_id
+        description: "Identificador da marca do modelo."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_marca')
+                field: marca_id
+
+      - name: nome
+        description: "Nome do modelo padronizado."
+        data_tests:
+          - not_null
+
+      - name: ano_modelo
+        description: "Ano do modelo."
+        data_tests:
+          - not_null
+
+      - name: cambio
+        description: "Tipo de câmbio do veículo."
+        data_tests:
+          - accepted_values:
+              values:
+                - Manual
+                - Automático
+                - CVT
+                - S-Tronic
+
+      - name: combustivel
+        description: "Tipo de combustível do veículo."
+        data_tests:
+          - accepted_values:
+              values:
+                - Flex
+                - Gasolina
+                - Diesel
+                - Híbrido
+
+  - name: stg_funcionario
+    description: "Tabela de funcionários com dados padronizados."
+
+    columns:
+      - name: funcionario_id
+        description: "Identificador único do funcionário."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: cargo_id
+        description: "Identificador do cargo do funcionário."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_cargo')
+                field: cargo_id
+
+      - name: loja_id
+        description: "Identificador da loja do funcionário."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_loja')
+                field: loja_id
+
+      - name: nome
+        description: "Nome do funcionário padronizado."
+        data_tests:
+          - not_null
+
+      - name: telefone
+        description: "Telefone do funcionário contendo apenas números."
+
+      - name: email
+        description: "E-mail do funcionário padronizado em letras minúsculas."
+
+      - name: status_funcionario
+        description: "Status do funcionário padronizado."
+        data_tests:
+          - accepted_values:
+              values:
+                - Ativo
+                - Inativo
+
+  - name: stg_veiculo
+    description: "Tabela de veículos com dados padronizados."
+
+    columns:
+      - name: veiculo_id
+        description: "Identificador único do veículo."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: modelo_id
+        description: "Modelo do veículo."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_modelo')
+                field: modelo_id
+
+      - name: fornecedor_id
+        description: "Fornecedor do veículo."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_fornecedor')
+                field: fornecedor_id
+
+      - name: chassi
+        description: "Número do chassi."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: cor
+        description: "Cor padronizada."
+
+      - name: ano_fabricacao
+        description: "Ano de fabricação."
+        data_tests:
+          - not_null
+
+      - name: status_veiculo
+        description: "Status do veículo."
+        data_tests:
+          - accepted_values:
+              values:
+                - Disponível
+                - Vendido
+                - Reservado
+
+      - name: preco
+        description: "Preço do veículo."
+        data_tests:
+          - not_null
+
+  - name: stg_venda
+    description: "Tabela de vendas com dados padronizados."
+
+    columns:
+      - name: venda_id
+        description: "Identificador único da venda."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: cliente_id
+        description: "Identificador do cliente."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_cliente')
+                field: cliente_id
+
+      - name: funcionario_id
+        description: "Identificador do funcionário."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_funcionario')
+                field: funcionario_id
+
+      - name: loja_id
+        description: "Identificador da loja."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_loja')
+                field: loja_id
+
+      - name: veiculo_id
+        description: "Identificador do veículo."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_veiculo')
+                field: veiculo_id
+
+      - name: data_venda
+        description: "Data da venda."
+        data_tests:
+          - not_null
+
+      - name: valor_total
+        description: "Valor total da venda."
+        data_tests:
+          - not_null
+
+      - name: status_venda
+        description: "Status da venda padronizado."
+        data_tests:
+          - accepted_values:
+              values:
+                - Concluída
+                - Cancelada
+                - Pendente
+
+  - name: stg_pagamento
+    description: "Tabela de pagamentos com dados padronizados."
+
+    columns:
+
+      - name: pagamento_id
+        description: "Identificador único do pagamento."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: venda_id
+        description: "Identificador da venda relacionada ao pagamento."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_venda')
+                field: venda_id
+
+      - name: forma_pagamento
+        description: "Forma de pagamento padronizada."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Pix
+                  - Cartão de Crédito
+                  - Financiamento
+                  - Boleto
+                  - Transferência
+                  - Dinheiro
+
+      - name: quantidade_parcelas
+        description: "Quantidade de parcelas do pagamento."
+        data_tests:
+          - not_null
+
+      - name: desconto
+        description: "Valor do desconto aplicado na venda."
+
+      - name: status_pagamento
+        description: "Status do pagamento padronizado."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Pago
+                  - Pendente
+                  - Cancelado
+
+      - name: data_pagamento
+        description: "Data em que o pagamento foi realizado."
+        
