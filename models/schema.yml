@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: stg_cliente
+    description: "Tabela de clientes com dados padronizados."
+
+    columns:
+      - name: cliente_id
+        description: "Identificador único do cliente."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: endereco_id
+        description: "Identificador do endereço."
+
+      - name: nome
+        description: "Nome do cliente padronizado."
+
+      - name: cpf
+        description: "CPF contendo apenas números."
+
+      - name: telefone
+        description: "Telefone contendo apenas números."
+
+      - name: email
+        description: "E-mail padronizado em letras minúsculas."
+
+      - name: status
+        description: "Status do cliente padronizado."
+
+  - name: stg_endereco
+    description: "Tabela de endereços com dados padronizados."
+
+    columns:
+      - name: endereco_id
+        description: "Identificador único do endereço."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: rua
+        description: "Nome da rua."
+
+      - name: numero
+        description: "Número do imóvel."
+
+      - name: bairro
+        description: "Bairro padronizado."
+
+      - name: cidade
+        description: "Cidade padronizada."
+
+      - name: estado
+        description: "Estado padronizado."
+
+      - name: cep
+        description: "CEP contendo apenas números."
+
+  - name: stg_marca
+    description: "Tabela de marca com dados padronizados."
+
+    columns:
+      - name: marca_id
+        description: "Identificador único da marca."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: nome
+        description: "Nome da marca."
+
+      - name: pais_origem
+        description: "Pais origem da marca."
+
+      - name: status
+        description: "Status da marca"
+
+  - name: stg_cargo
+    description: "Tabela de cargo com dados padronizados."
+
+    columns:
+      - name: cargo_id
+        description: "Identificador único do cargo."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: nome
+        description: "Nome do cargo."

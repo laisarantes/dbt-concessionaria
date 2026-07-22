@@ -1,0 +1,40 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Camada Raw contendo os dados brutos da concessionária, carregados diretamente do sistema operacional, sem transformações."
+    schema: raw
+
+    tables:
+      - name: cliente
+        description: "Cadastro de clientes."
+
+      - name: endereco
+        description: "Endereços utilizados por clientes, lojas e fornecedores."
+
+      - name: cargo
+        description: "Cargos existentes na concessionária."
+
+      - name: loja
+        description: "Cadastro das lojas da concessionária."
+
+      - name: fornecedor
+        description: "Empresas fornecedoras de veículos."
+
+      - name: marca
+        description: "Marcas dos veículos."
+
+      - name: modelo
+        description: "Modelos de veículos vinculados a uma marca."
+
+      - name: funcionario
+        description: "Cadastro de funcionários."
+
+      - name: veiculo
+        description: "Veículos disponíveis ou vendidos pela concessionária."
+
+      - name: venda
+        description: "Registro das vendas realizadas."
+
+      - name: pagamento
+        description: "Informações sobre os pagamentos das vendas."
