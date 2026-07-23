@@ -18,17 +18,13 @@ renamed as (
         initcap(trim(nome)) as nome,
 
         nullif(
-            regexp_replace(telefone, '[^0-9]', '', 'g'),
+            {{ apenas_numeros('telefone') }},
             ''
         ) as telefone,
 
         lower(trim(email)) as email,
 
-        case
-            when upper(trim(status)) = 'ATIVO' then 'Ativo'
-            when upper(trim(status)) = 'INATIVO' then 'Inativo'
-            else initcap(nullif(trim(status), ''))
-        end as status_funcionario
+        initcap(nullif(trim(status), '')) as status_funcionario
 
     from source
 

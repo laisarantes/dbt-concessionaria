@@ -14,11 +14,11 @@ renamed as (
         venda_id,
 
         case
-            when upper(trim(forma_pagamento)) in 
+            when upper(trim(forma_pagamento)) in
                 ('CARTAO DE CREDITO', 'CARTÃO DE CRÉDITO')
                 then 'Cartão de Crédito'
 
-            when upper(trim(forma_pagamento)) in 
+            when upper(trim(forma_pagamento)) in
                 ('TRANSFERENCIA', 'TRANSFERÊNCIA')
                 then 'Transferência'
 
@@ -26,23 +26,11 @@ renamed as (
 
         end as forma_pagamento,
 
-        quantidade_parcelas,
+        coalesce(quantidade_parcelas, 1) as quantidade_parcelas,
 
         coalesce(desconto, 0) as desconto,
 
-        case
-            when upper(trim(status_pagamento)) = 'PAGO'
-                then 'Pago'
-
-            when upper(trim(status_pagamento)) = 'CANCELADO'
-                then 'Cancelado'
-
-            when upper(trim(status_pagamento)) = 'PENDENTE'
-                then 'Pendente'
-
-            else initcap(trim(status_pagamento))
-
-        end as status_pagamento,
+        initcap(trim(status_pagamento)) as status_pagamento,
 
         data_pagamento
 

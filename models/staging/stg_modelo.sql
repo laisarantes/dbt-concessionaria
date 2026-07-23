@@ -19,7 +19,6 @@ renamed as (
         case
             when upper(trim(cambio)) = 'AUTOMATICO' then 'Automático'
             when upper(trim(cambio)) = 'CVT' then 'CVT'
-            when upper(trim(cambio)) = 'S-TRONIC' then 'S-Tronic'
             else initcap(trim(cambio))
         end as cambio,
 

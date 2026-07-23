@@ -13,17 +13,21 @@ renamed as (
         modelo_id,
         fornecedor_id,
 
-        upper(trim(chassi)) as chassi,
+        upper(trim(placa)) as placa,
 
-        initcap(trim(cor)) as cor,
+        upper(trim(chassi)) as chassi,
 
         ano_fabricacao,
 
+        initcap(trim(cor)) as cor,
+
+        quilometragem,
+
+        initcap(trim(condicao)) as condicao,
+
         case
-            when upper(trim(status)) = 'DISPONIVEL' then 'Disponível'
-            when upper(trim(status)) = 'DISPONÍVEL' then 'Disponível'
-            when upper(trim(status)) = 'VENDIDO' then 'Vendido'
-            when upper(trim(status)) = 'RESERVADO' then 'Reservado'
+            when upper(trim(status)) in ('DISPONIVEL', 'DISPONÍVEL')
+                then 'Disponível'
             else initcap(trim(status))
         end as status_veiculo,
 

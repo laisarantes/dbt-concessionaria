@@ -20,10 +20,8 @@ renamed as (
         valor_total,
 
         case
-            when upper(trim(status)) = 'CONCLUIDA' then 'Concluída'
-            when upper(trim(status)) = 'CONCLUÍDA' then 'Concluída'
-            when upper(trim(status)) = 'CANCELADA' then 'Cancelada'
-            when upper(trim(status)) = 'PENDENTE' then 'Pendente'
+            when upper(trim(status)) in ('CONCLUIDA', 'CONCLUÍDA')
+                then 'Concluída'
             else initcap(trim(status))
         end as status_venda
 

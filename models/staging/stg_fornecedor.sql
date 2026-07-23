@@ -8,27 +8,28 @@ with source as (
 renamed as (
 
     select
+
         fornecedor_id,
         endereco_id,
 
         initcap(trim(nome)) as nome,
 
         nullif(
-            regexp_replace(cnpj, '[^0-9]', '', 'g'),
+            {{ apenas_numeros('cnpj') }},
             ''
         ) as cnpj,
 
         nullif(
-            regexp_replace(telefone, '[^0-9]', '', 'g'),
+            {{ apenas_numeros('telefone') }},
             ''
         ) as telefone,
 
         lower(trim(email)) as email,
 
-    case
-         when upper(trim(status)) = 'ATIVA' then 'Ativo'
-         when upper(trim(status)) = 'INATIVA' then 'Inativo'
-    else initcap(trim(status))
+        case
+            when upper(trim(status)) = 'ATIVA' then 'Ativo'
+            when upper(trim(status)) = 'INATIVA' then 'Inativo'
+            else initcap(trim(status))
         end as status_fornecedor
 
     from source

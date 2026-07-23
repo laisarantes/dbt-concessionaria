@@ -31,8 +31,8 @@ renamed as (
         end as estado,
 
         nullif(
-            regexp_replace(cep, '[^0-9]', '', 'g'),
-            ''
+           {{apenas_numeros('cep')}}, 
+           ''
         ) as cep
 
     from source

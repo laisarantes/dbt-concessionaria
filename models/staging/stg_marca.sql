@@ -8,15 +8,16 @@ with source as (
 renamed as (
 
     select
+
         marca_id,
 
-      case
-    when upper(trim(nome)) = 'TOYTA' then 'Toyota'
-    when upper(trim(nome)) = 'MADZA' then 'Mazda'
-    when upper(trim(nome)) = 'MAZDAA' then 'Mazda'
-    when upper(trim(nome)) = 'HONDAA' then 'Honda'
-    else initcap(nullif(trim(nome), ''))
-end as nome,
+        case
+            when upper(trim(nome)) = 'TOYTA' then 'Toyota'
+            when upper(trim(nome)) = 'MADZA' then 'Mazda'
+            when upper(trim(nome)) = 'MAZDAA' then 'Mazda'
+            when upper(trim(nome)) = 'HONDAA' then 'Honda'
+            else initcap(nullif(trim(nome), ''))
+        end as nome,
 
         case
             when upper(trim(pais_origem)) = 'JP' then 'Japão'
@@ -25,7 +26,7 @@ end as nome,
             else initcap(trim(pais_origem))
         end as pais_origem,
 
-    initcap(nullif(trim(status), '')) as status_marca
+        initcap(nullif(trim(status), '')) as status_marca
 
     from source
 

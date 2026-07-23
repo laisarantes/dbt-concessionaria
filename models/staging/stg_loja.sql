@@ -8,13 +8,14 @@ with source as (
 renamed as (
 
     select
+
         loja_id,
         endereco_id,
 
         initcap(trim(nome)) as nome,
 
         nullif(
-            regexp_replace(telefone, '[^0-9]', '', 'g'),
+            {{ apenas_numeros('telefone') }},
             ''
         ) as telefone,
 
